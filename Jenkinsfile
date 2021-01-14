@@ -1,16 +1,30 @@
 pipeline {
     agent any
     stages {
-        
-     stage("test") {
-         steps { 
-		  echo 'testing'
+        stage ('Test') {
+            steps {
+                echo "Test"
             }
+            post {
+                always {
+                    echo "Post-Always result"
                 }
-      stage("build") {
-         steps { 
-		  echo 'building'
             }
-                }          
+        }
+        stage ('Build') {
+            steps {
+                echo "Build"
+            }
+            post {
+                always {
+                    echo "Post-Build"
+                }
+            }
+        }
+    }
+    post {
+        always {
+            echo "Pipeline result"
+        }
     }
 }
